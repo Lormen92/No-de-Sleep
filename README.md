@@ -11,7 +11,7 @@ For convenience, a `.bat` file is included to simplify and speed up the executio
 
 ### Running the .bat file
 
-1. Locate the `run-no-de-sleep.bat` file in the project directory.
+1. Locate the `No(de)Sleep.bat` file in the project directory.
 2. Double-click the `.bat` file to start No(de)Sleep.
 
 The `.bat` file automates the process of launching the application, making it quicker and easier for users.
