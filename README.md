@@ -7,14 +7,14 @@ No(de)Sleep is a simple tool that prevents your computer from going into sleep m
 
 ## Usage on Windows
 
-For convenience, a `.bat` file is included to simplify the execution on Windows. You can use this file to quickly start the application without needing to manually enter commands in the command prompt.
+For convenience, a `.bat` file is included to simplify and speed up the execution process on Windows. This file allows you to start the application without having to manually open the terminal and type commands.
 
 ### Running the .bat file
 
-1. Locate the `No(de)Sleep.bat` file in the project directory.
+1. Locate the `run-no-de-sleep.bat` file in the project directory.
 2. Double-click the `.bat` file to start No(de)Sleep.
 
-The `.bat` file contains the necessary commands to launch the application, making it easier for users who are not familiar with the command line.
+The `.bat` file automates the process of launching the application, making it quicker and easier for users.
 
 ## License
 
