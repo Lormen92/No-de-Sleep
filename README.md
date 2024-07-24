@@ -5,6 +5,20 @@ No(de)Sleep prevents the PC from entering sleep mode.
 
 No(de)Sleep is a simple tool that prevents your computer from going into sleep mode. This can be useful during long-running processes or when you want to ensure your PC stays awake.
 
+## Installation
+To use No(de)Sleep, you need to have Node.js installed on your computer. Follow these steps to install the necessary dependencies:
+
+1. **Install Node.js:**
+   - Download and install Node.js from the [official website](https://nodejs.org/). This will also install npm (Node Package Manager) which is required to manage dependencies.
+
+2. **Install project dependencies:**
+   - Open a terminal or command prompt.
+   - Navigate to the project directory where No(de)Sleep is located.
+   - Run the following command to install the required dependencies:
+     ```
+     npm install
+     ```
+
 ## Usage on Windows
 
 For convenience, a `.bat` file is included to simplify and speed up the execution process on Windows. This file allows you to start the application without having to manually open the terminal and type commands.
