@@ -1,0 +1,15 @@
+{
+  "name": "no_de_sleep",
+  "version": "1.0.1",
+  "description": "No(de)Sleep prevents the PC from entering sleep mode.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "L",
+  "license": "ISC",
+  "dependencies": {
+    "@nut-tree-fork/nut-js": "^4.2.1"
+  }
+}
