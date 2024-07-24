@@ -6,6 +6,7 @@ const { mouse, left, right } = require('@nut-tree-fork/nut-js');
 
 const readline = require('readline');
 let countdownInterval;
+let countdownStartTime;
 let intervalDuration;
 
 // Create a readline interface to read user input
@@ -23,7 +24,7 @@ async function moveMouse() {
 // Function to perform the countdown
 function updateCountdownDisplay() {
     const currentTime = new Date().getTime();
-    const remainingSeconds = Math.ceil((intervalDuration - (currentTime % intervalDuration)) / 1000); // It's not very precise, but it's the best it can be
+    const remainingSeconds = Math.ceil((intervalDuration - (currentTime - countdownStartTime)) / 1000); // It's not very precise, but it's the best it can be
     
     readline.clearLine(process.stdout, 0);
     readline.cursorTo(process.stdout, 0);
@@ -32,6 +33,7 @@ function updateCountdownDisplay() {
 
 function startCountdown() {
     clearInterval(countdownInterval);
+    countdownStartTime = new Date().getTime();
     countdownInterval = setInterval(updateCountdownDisplay, 500);
 }
 
