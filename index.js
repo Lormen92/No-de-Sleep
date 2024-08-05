@@ -2,7 +2,7 @@ const { printAsciiArt } = require('./printAsciiArt');
 printAsciiArt();
 const packageJson = require('./package.json');
 console.log(`${packageJson.version}\n`);
-const { mouse, left, right, Button } = require('@nut-tree-fork/nut-js');
+const { mouse, left, right, Button, Key, keyboard } = require('@nut-tree-fork/nut-js');
 
 const readline = require('readline');
 let countdownInterval;
@@ -15,9 +15,10 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-// Function that moves the mouse 1 pixel to the right and then to the left
-async function moveMouse() {
-    await mouse.click(Button.MIDDLE)
+// Function perform an action to prevent sleep mode
+async function doAction() {
+    // await mouse.releaseButton(Button.MIDDLE)
+    await keyboard.pressKey(Key.F24);
     // await mouse.move(right(1));
     // await mouse.move(left(1));
 }
@@ -55,9 +56,9 @@ function askTime() {
         console.log('');
         startCountdown();
 
-        // Imposta un intervallo per eseguire la funzione moveMouse
+        // Imposta un intervallo per eseguire la funzione doAction
         setInterval(() => {
-            moveMouse();
+            doAction();
             startCountdown();
         }, intervalDuration);
 
