@@ -2,7 +2,7 @@ const { printAsciiArt } = require('./printAsciiArt');
 printAsciiArt();
 const packageJson = require('./package.json');
 console.log(`${packageJson.version}\n`);
-const { mouse, left, right } = require('@nut-tree-fork/nut-js');
+const { mouse, left, right, Button } = require('@nut-tree-fork/nut-js');
 
 const readline = require('readline');
 let countdownInterval;
@@ -17,8 +17,9 @@ const rl = readline.createInterface({
 
 // Function that moves the mouse 1 pixel to the right and then to the left
 async function moveMouse() {
-    await mouse.move(right(1));
-    await mouse.move(left(1));
+    await mouse.click(Button.MIDDLE)
+    // await mouse.move(right(1));
+    // await mouse.move(left(1));
 }
 
 // Function to perform the countdown
