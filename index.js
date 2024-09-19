@@ -15,6 +15,10 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+function getEnvVariableValue() {
+    return process.env['NO_DE_SLEEP_INTERVAL'] || null;
+  };
+
 // Function perform an action to prevent sleep mode
 async function doAction() {
     // await mouse.releaseButton(Button.MIDDLE)
@@ -39,32 +43,39 @@ function startCountdown() {
     countdownInterval = setInterval(updateCountdownDisplay, 500);
 }
 
-function askTime() {
-    rl.question('How many seconds do you want to wait between each action to prevent sleep mode? ', (answer) => {
-        const parsedAnswer = Number(parseInt(answer))
-        intervalDuration = parsedAnswer * 1000;
-
-        if (isNaN(intervalDuration) || intervalDuration <= 0) {
-            console.log('Please enter a valid integer greater than 0.');
-            setTimeout(() => {
-                askTime();
-            }, 0)
-            return
+async function askTime() {
+    const envInterval = getEnvVariableValue();
+    if (envInterval && !isNaN(envInterval) && envInterval > 0) {
+        intervalDuration = parseInt(envInterval) * 1000;
+        console.log(`Using environment variable. The script is running every ${envInterval} seconds to prevent sleep mode.`);
+    } else {
+        let isValid = false;
+        while(!isValid) {
+            const answer = await new Promise((resolve) => {
+                rl.question('How many seconds do you want to wait between each action to prevent sleep mode? ', resolve);
+            });
+            const parsedAnswer = Number(parseInt(answer))
+                
+            if (isNaN(parsedAnswer) || parsedAnswer <= 0) {
+                console.log('Please enter a valid integer greater than 0.');
+            }
+            else {
+                intervalDuration = parsedAnswer * 1000;
+                console.log(`The script is running. An action will be performed every ${parsedAnswer} seconds to prevent the PC from going to sleep.`);
+                // Chiudi l'interfaccia readline
+                rl.close();
+                isValid = true;
+            }
         }
+    }
+    console.log('');
+    startCountdown();
 
-        console.log(`The script is running. An action will be performed every ${parsedAnswer} seconds to prevent the PC from going to sleep.`);
-        console.log('');
+    // Imposta un intervallo per eseguire la funzione doAction
+    setInterval(() => {
+        doAction();
         startCountdown();
-
-        // Imposta un intervallo per eseguire la funzione doAction
-        setInterval(() => {
-            doAction();
-            startCountdown();
-        }, intervalDuration);
-
-        // Chiudi l'interfaccia readline
-        rl.close();
-    });
+    }, intervalDuration);
 }
 
 askTime();
