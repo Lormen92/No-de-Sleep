@@ -49,6 +49,8 @@ You can set this value in two ways:
 In both cases, the value should represent the number of SECONDS for the interval. 
 If neither method is used, the application will ask to set the interval every time.
 
+We suggest using the `config.json` file approach; however, if you prefer to set an environment variable, we provide a batch script (`No(de)Sleep_set_env.bat`) to simplify the creation (and removal) of the environment variable (from version 1.0.5).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

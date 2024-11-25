@@ -24,7 +24,7 @@ echo 2) Remove the environment variable (%ENV_VAR_NAME%)
 echo 3) Exit
 :menu_choice
 echo.
-set /p choice="Enter your choice:"
+set /p choice="Enter your choice: "
 
 if "%choice%"=="1" goto set_variable
 if "%choice%"=="2" goto remove_variable
@@ -48,6 +48,7 @@ for /f "delims=0123456789" %%A in ("%value%") do (
 :: Set the environment variable and update its value for the session.
 setx %ENV_VAR_NAME% %value% >nul
 set CURRENT_VALUE=%value%
+echo.
 echo The variable %ENV_VAR_NAME% has been set to %value%.
 echo Press any key to continue...
 pause >nul
@@ -56,10 +57,12 @@ goto menu
 :remove_variable
 cls
 echo Are you sure you want to remove the environment variable %ENV_VAR_NAME%?
-set /p confirm="Type 'y' to confirm or any other key to cancel:"
+set /p confirm="Type 'y' to confirm or any other key to cancel: "
+echo.
 if /i "!confirm!"=="y" (
-    setx %ENV_VAR_NAME% "" >nul
-    set CURRENT_VALUE=""
+    :: setx %ENV_VAR_NAME% "" >nul
+    reg delete "HKCU\Environment" /F /V %ENV_VAR_NAME% >nul 2>&1
+    set CURRENT_VALUE=
     echo The variable %ENV_VAR_NAME% has been removed.
 ) else (
     echo Operation cancelled.
