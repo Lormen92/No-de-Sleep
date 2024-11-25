@@ -1,6 +1,6 @@
 {
   "name": "no_de_sleep",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "No(de)Sleep prevents the PC from entering sleep mode.",
   "main": "index.js",
   "scripts": {

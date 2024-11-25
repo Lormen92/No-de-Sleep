@@ -1,8 +1,11 @@
+const fs = require('fs');
 const { printAsciiArt } = require('./printAsciiArt');
 printAsciiArt();
 const packageJson = require('./package.json');
 console.log(`${packageJson.version}\n`);
 const { mouse, left, right, Button, Key, keyboard } = require('@nut-tree-fork/nut-js');
+
+const configPath = './config.json'
 
 const readline = require('readline');
 let countdownInterval;
@@ -17,7 +20,16 @@ const rl = readline.createInterface({
 
 function getEnvVariableValue() {
     return process.env['NO_DE_SLEEP_INTERVAL'] || null;
-  };
+};
+
+function getConfigValue(key) {
+    try {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      return config[key]; // undefined if missing key
+    } catch (error) {
+      return undefined;
+    }
+}
 
 // Function perform an action to prevent sleep mode
 async function doAction() {
@@ -44,10 +56,15 @@ function startCountdown() {
 }
 
 async function askTime() {
+    const configInterval = getConfigValue('actionInterval');
     const envInterval = getEnvVariableValue();
-    if (envInterval && !isNaN(envInterval) && envInterval > 0) {
+    if(Number.isFinite(configInterval) && configInterval > 0) {
+        intervalDuration = parseInt(configInterval) * 1000;
+        console.log(`Using "config" variable. The script is running every ${parseInt(configInterval)} seconds to prevent sleep mode.`);
+    }
+    else if (envInterval && !isNaN(envInterval) && envInterval > 0) {
         intervalDuration = parseInt(envInterval) * 1000;
-        console.log(`Using environment variable. The script is running every ${envInterval} seconds to prevent sleep mode.`);
+        console.log(`Using environment variable. The script is running every ${parseInt(envInterval)} seconds to prevent sleep mode.`);
     } else {
         let isValid = false;
         while(!isValid) {

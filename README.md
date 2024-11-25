@@ -30,6 +30,25 @@ For convenience, a `.bat` file is included to simplify and speed up the executio
 
 The `.bat` file automates the process of launching the application, making it quicker and easier for users.
 
+## Setting the Execution Interval  
+No(de)Sleep allows you to configure a default interval for its execution (starting from version 1.0.4).
+This value determines the frequency (in seconds) at which the application sends signals to prevent the PC from sleeping.
+You can set this value in two ways:
+
+1. **Using an environment variable:**  
+   Set an environment variable named `NO_DE_SLEEP_INTERVAL`.
+
+2. **Using a JSON configuration file:**
+   Create a config.json file in the root directory of the project with the following structure: 
+   ```bash
+   {
+    "actionInterval": 50
+   }
+   ```
+
+In both cases, the value should represent the number of SECONDS for the interval. 
+If neither method is used, the application will ask to set the interval every time.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
